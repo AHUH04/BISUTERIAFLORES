@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Bisutería Flores</title>
+    <link rel="icon" href="/Resource/Logo/logo-bisuteria.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/idiomas.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="/Resource/Logo/logo.png" alt="Logo de Bisutería Flores" class="logo">
+            <h1 class="company-name">Bisutería Flores</h1>
+            <p class="slogan">Joyas que cuentan tu historia</p>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active" data-translate="Inicio">Inicio</a></li>
+                <li><a href="#productos" data-translate="Productos">Productos</a></li>
+                <li><a href="#nosotros" data-translate="Nosotros">Nosotros</a></li>
+                <li><a href="#contacto" data-translate="Contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" style="position: relative; height: 80vh; overflow: hidden;">
+        <div style="background-image: url('/Resource/collar.jpg'); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; filter: brightness(50%);"></div>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%; color: #fff; z-index: 1;">
+            <h2 class="hero-title">
+                <span class="letter-wrapper">
+                    <span class="letters-main" data-translate="Bienvenido a Bisutería Flores">Bienvenido a Bisutería Flores</span>
+                </span>
+            </h2>
+            <p class="hero-subtitle">
+                <span class="letter-wrapper">
+                    <span class="letters-sub" data-translate="Joyas únicas hechas a mano para ti.">Joyas únicas hechas a mano para ti.</span>
+                </span>
+            </p>
+            <a href="#productos" class="cta-button" data-translate="Descubre Nuestros Productos">
+                Descubre Nuestros Productos
+                <span class="cta-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="productos" style="padding: 50px; text-align: center;">
+        <h2 data-translate="Nuestros Productos">Nuestros Productos</h2>
+        <p data-translate="Descubre nuestra colección de joyas únicas.">Descubre nuestra colección de joyas únicas.</p>
+        <div class="product-gallery">
+            <div class="product-gallery" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div class="product-card" style="display: flex; flex-direction: column; align-items: center; border: 2px solid #ccc; padding: 10px; border-radius: 10px; width: 200px;">
+                    <img src="/Resource/Productos/collarartes.jpg" alt="Collar artesanal" style="margin-bottom: 10px; width: 150px; height: auto; border-radius: 5px;">
+                    <div style="text-align: center;">
+                        <h3 data-translate="Collar Artesanal">Collar Artesanal</h3>
+                        <p data-translate="Hecho a mano con materiales de alta calidad.">Hecho a mano con materiales de alta calidad.</p>
+                    </div>
+                </div>
+                <div class="product-card" style="display: flex; flex-direction: column; align-items: center; border: 2px solid #ccc; padding: 10px; border-radius: 10px; width: 200px;">
+                    <img src="/Resource/Productos/pulsera.webp" alt="Pulsera de perlas" style="margin-bottom: 10px; width: 150px; height: auto; border-radius: 5px;">
+                    <div style="text-align: center;">
+                        <h3 data-translate="Pulsera de Perlas">Pulsera de Perlas</h3>
+                        <p data-translate="Elegancia para cualquier ocasión.">Elegancia para cualquier ocasión.</p>
+                    </div>
+                </div>
+                <div class="product-card" style="display: flex; flex-direction: column; align-items: center; border: 2px solid #ccc; padding: 10px; border-radius: 10px; width: 200px;">
+                    <img src="/Resource/Productos/anillo.webp" alt="Anillo de plata" style="margin-bottom: 10px; width: 150px; height: auto; border-radius: 5px;">
+                    <div style="text-align: center;">
+                        <h3 data-translate="Anillo de Plata">Anillo de Plata</h3>
+                        <p data-translate="Diseño exclusivo y moderno.">Diseño exclusivo y moderno.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros">
+        <div class="content">
+            <h2 data-translate="Sobre nosotros">Sobre nosotros</h2>
+            <p data-translate="descripcion-empresa">
+                Bisutería Flores es una marca dedicada a crear joyas únicas y personalizadas.</p>
+            </p>
+        </div>
+        <div class="model-container">
+            <img src="/Resource/nosotros.jpg" alt="Sobre Nosotros" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+        </div>
+    </section>
+
+    <footer style="padding: 20px; text-align: center; background-color: #f8f8f8;">
+        <p>&copy; 2025 Bisutería Flores. Todos los derechos reservados.</p>
+    </footer>
+
+<script>
+        // Traducción dinámica
+        const translations = {
+            en: {
+                "Inicio": "Home",
+                "Productos": "Products",
+                "Nosotros": "About Us",
+                "Contacto": "Contact",
+                "Bienvenido a Bisutería Flores": "Welcome to Bisutería Flores",
+                "Joyas únicas hechas a mano para ti.": "Unique handmade jewelry for you.",
+                "Descubre Nuestros Productos": "Discover Our Products",
+                "Nuestros Productos": "Our Products",
+                "Descubre nuestra colección de joyas únicas.": "Discover our collection of unique jewelry.",
+                "Collar Artesanal": "Handmade Necklace",
+                "Hecho a mano con materiales de alta calidad.": "Handmade with high-quality materials.",
+                "Pulsera de Perlas": "Pearl Bracelet",
+                "Elegancia para cualquier ocasión.": "Elegance for any occasion.",
+                "Anillo de Plata": "Silver Ring",
+                "Diseño exclusivo y moderno.": "Exclusive and modern design.",
+                "Sobre Nosotros": "About Us",
+                "Bisutería Flores es una marca dedicada a crear joyas únicas y personalizadas.": "Bisutería Flores is a brand dedicated to creating unique and personalized jewelry."
+            }
+        };
+
+        function translatePage(lang) {
+            document.querySelectorAll("[data-translate]").forEach(el => {
+                const key = el.getAttribute("data-translate");
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>
