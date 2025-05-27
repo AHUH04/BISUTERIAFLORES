@@ -1,0 +1,902 @@
+.fab-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    display: none;
+}
+
+.fab-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #FF9800;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.fab-button::before {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab-button:hover {
+    transform: scale(1.1);
+    background: #F57C00;
+}
+
+.fab-button.active {
+    transform: rotate(45deg);
+    background: #E65100;
+    color: white;
+}
+
+.fab-button.active::before {
+    transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.fab-menu {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 200px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab-menu.active {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fab-menu-item {
+    padding: 0.8rem 1.5rem;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.fab-menu-item:hover {
+    background: #f5f5f5;
+    transform: translateX(-5px);
+}
+
+.fab-menu-item {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #FF9800;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    transform: scale(0.95);
+    border: 1px solid #FFE0B2;
+}
+
+.fab-menu-item:hover {
+    background: #FFF3E0;
+    transform: scale(1) translateX(-5px);
+    color: #F57C00;
+    border-color: #FFB74D;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .fab-button {
+    background: #FF9800;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
+}
+
+[data-theme="dark"] .fab-menu-item {
+    background: #333;
+    border-color: #FF9800;
+    color: #FF9800;
+}
+
+[data-theme="dark"] .fab-menu-item:hover {
+    background: #424242;
+    border-color: #FFB74D;
+    color: #FFB74D;
+}
+
+/* =========================================
+   1. Modal Base Styles
+========================================= */
+.property-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    background: linear-gradient(145deg, #f6f8fa, #ffffff);
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e1e8ed;
+}
+
+.close-modal {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f8f9fa;
+}
+
+.close-modal:hover {
+    background: #e9ecef;
+    color: #333;
+    transform: rotate(90deg);
+}
+
+/* =========================================
+   2. Form Grid Layout
+========================================= */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-section {
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* =========================================
+   3. Input Styles
+========================================= */
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+    min-height: 65px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    background: transparent;
+    padding: 12px 15px;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    background: #ffffff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.input-group label {
+    position: absolute;
+    left: 0.8rem;
+    top: 0.8rem;
+    color: #666;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    font-size: 0.9em;
+    left: 15px;
+    top: -10px;
+    background: #f8fafc;
+    padding: 0 8px;
+    color: #7f8c8d;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Input States */
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group textarea:focus + label,
+.input-group textarea:not(:placeholder-shown) + label {
+    transform: translateY(-1.4rem) scale(0.8);
+    color: #FF9800;
+    background: white;
+    padding: 0 0.4rem;
+    transform: translateY(-1.8rem) scale(0.85);
+    color: #2196F3;
+}
+
+/* Description Area Specific */
+.description-group {
+    grid-column: 1 / -1;
+    min-height: 150px;
+}
+
+.description-group textarea {
+    min-height: 120px;
+    padding-top: 2rem;
+    resize: vertical;
+}
+
+/* Estilos para los nuevos campos */
+.input-group input[type="text"] {
+    text-transform: capitalize;
+}
+
+/* =========================================
+   4. Image Upload Section
+========================================= */
+.image-upload-section {
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.image-upload-section:hover {
+    border-color: #FF9800;
+    background: rgba(255,152,0,0.05);
+    background: #2a2a2a;
+    border-color: #64B5F6;
+}
+
+.upload-area {
+    border: 2px dashed #bdc3c7;
+    border-radius: 10px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.upload-area:hover {
+    border-color: #3498db;
+    background: #f7fbfe;
+}
+
+.upload-area i {
+    font-size: 2em;
+    color: #FF9800;
+    margin-bottom: 1rem;
+    font-size: 30px;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.upload-area p {
+    color: #7f8c8d;
+    margin: 0;
+}
+
+.image-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-top: 20px;
+}
+
+.preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.remove-image {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #666;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e74c3c;
+}
+
+/* =========================================
+   5. Submit Button
+========================================= */
+.submit-button {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background: #F57C00;
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #2980b9, #3498db);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.submit-button i {
+    font-size: 18px;
+}
+
+/* =========================================
+   6. Dark Mode Styles
+========================================= */
+[data-theme="dark"] {
+    /* Modal */
+    .modal-content {
+        background: #1a1a1a;
+    }
+    
+    .modal-content h2 {
+        color: #64B5F6;
+    }
+
+    /* Form Sections */
+    .form-section,
+    .image-upload-section {
+        background: #242424;
+    }
+
+    /* Inputs */
+    .input-group input,
+    .input-group textarea {
+        background: #333;
+        border-color: #444;
+        color: #fff;
+    }
+
+    .input-group label {
+        color: #aaa;
+    }
+
+    .input-group input:focus + label,
+    .input-group textarea:focus + label {
+        color: #64B5F6;
+    }
+
+    /* Image Upload */
+    .image-upload-section:hover {
+        background: #2a2a2a;
+        border-color: #64B5F6;
+    }
+}
+
+/* =========================================
+   7. Scrollbar Styles
+========================================= */
+.form-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.form-grid::-webkit-scrollbar-thumb {
+    background: #2196F3;
+    border-radius: 4px;
+}
+
+.form-grid::-webkit-scrollbar-thumb:hover {
+    background: #1976D2;
+}
+
+/* ...existing code for fab-container and other components... */
+
+/* ... existing styles ... */
+
+/* =========================================
+   Grid y Tarjetas de Edición
+========================================= */
+.property-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-height: calc(90vh - 200px);
+    overflow-y: auto;
+    align-items: stretch;
+}
+
+.edit-property-card {
+    background: var(--card-bg, #fff);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 380px; /* Altura fija ajustada */
+    position: relative;
+    overflow: hidden;
+}
+
+.edit-property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.edit-property-card img {
+    width: 100%;
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+}
+
+.edit-property-card .card-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.edit-property-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.edit-property-card .property-details {
+    color: #ffffff;
+    font-size: 0.95rem;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+
+.edit-property-card button {
+    background: linear-gradient(45deg, #FF9800, #F57C00);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto; /* Empuja el botón al final */
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.edit-property-card button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .edit-property-card {
+    --card-bg: #242424;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    background: #242424;
+    color: #fff;
+}
+
+[data-theme="dark"] .edit-property-card h3 {
+    color: #fff;
+}
+
+[data-theme="dark"] .input-group input,
+[data-theme="dark"] .input-group textarea {
+    background: #333;
+    border-color: #444;
+    color: #fff;
+}
+
+[data-theme="dark"] .input-group label {
+    background: #242424;
+    color: #aaa;
+}
+
+[data-theme="dark"] .modal-content {
+    background: #1a1a1a;
+}
+
+[data-theme="dark"] .input-group input:focus + label,
+[data-theme="dark"] .input-group textarea:focus + label {
+    color: #64B5F6;
+}
+
+[data-theme="dark"] .form-section {
+    background: #242424;
+}
+
+[data-theme="dark"] .image-upload-section {
+    background: #242424;
+}
+
+[data-theme="dark"] .input-group input:focus,
+[data-theme="dark"] .input-group textarea:focus {
+    border-color: #64B5F6;
+    box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.2);
+}
+
+[data-theme="dark"] .modal-content h2 {
+    color: #64B5F6;
+}
+
+[data-theme="dark"] .image-upload-section:hover {
+    background: #2a2a2a;
+    border-color: #64B5F6;
+}
+
+[data-theme="dark"] .edit-property-card button {
+    background: linear-gradient(45deg, #FF9800, #F57C00);
+}
+
+[data-theme="dark"] .edit-property-card button:hover {
+    background: linear-gradient(45deg, #F57C00, #E65100);
+}
+
+/* Scrollbar styling */
+.property-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.property-list::-webkit-scrollbar-track {
+    background: transparent;
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.property-list::-webkit-scrollbar-thumb {
+    background: rgba(33, 150, 243, 0.5);
+    border-radius: 3px;
+    background: #2196F3;
+}
+
+.property-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(33, 150, 243, 0.8);
+}
+
+/* Scrollbar para el modal */
+.form-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.form-grid::-webkit-scrollbar-thumb {
+    background: #2196F3;
+    border-radius: 4px;
+}
+
+.form-grid::-webkit-scrollbar-thumb:hover {
+    background: #1976D2;
+}
+
+/* ... existing styles ... */
+
+.property-details {
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin-top: 0.5rem;
+}
+
+[data-theme="dark"] .property-details {
+    color: #ffffff;
+}
+
+/* Estilos para los nuevos campos */
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.edit-property-card .property-details {
+    color: #ffffff;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    margin: 0.5rem 0;
+}
+
+/* =========================================
+   Responsive Styles
+========================================= */
+@media (max-width: 1024px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .image-upload-section {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-row {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        padding: 2rem 1.5rem;
+        width: 95%;
+        margin: 1rem;
+    }
+
+    .property-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        padding: 1rem;
+    }
+
+    .input-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .edit-property-card {
+        height: auto;
+        min-height: 300px;
+    }
+
+    .edit-property-card .card-content {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .edit-property-card button {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 1.5rem 1rem;
+        margin: 0.5rem;
+    }
+
+    .property-list {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .form-section {
+        padding: 1rem;
+    }
+
+    .input-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        font-size: 14px;
+        padding: 1rem 0.8rem 0.5rem;
+    }
+
+    .input-group label {
+        font-size: 13px;
+    }
+
+    .submit-button {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .close-modal {
+        right: 15px;
+        top: 15px;
+    }
+
+    .edit-property-card img {
+        height: 160px;
+    }
+}
+
+/* Ajustes para dispositivos muy pequeños */
+@media (max-width: 320px) {
+    .modal-content {
+        padding: 1rem;
+    }
+
+    .edit-property-card img {
+        height: 140px;
+    }
+
+    .edit-property-card .property-details {
+        font-size: 0.8rem;
+    }
+}
+
+/* Ajustes de altura para pantallas pequeñas */
+@media (max-height: 700px) {
+    .modal-content {
+        max-height: 95vh;
+    }
+
+    .form-grid {
+        max-height: calc(95vh - 160px);
+    }
+
+    .property-list {
+        max-height: calc(95vh - 140px);
+    }
+}
+
+.notification {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transform: translateX(-100%);
+}
+
+.notification.success {
+    background: #4CAF50;
+}
+
+.notification.error {
+    background: #f44336;
+}
+
