@@ -40,12 +40,12 @@
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%; color: #fff; z-index: 1;">
             <h2 class="hero-title">
                 <span class="letter-wrapper">
-                    <span class="letters-main" data-translate="Bienvenido a Bisutería Flores">Bienvenido a Bisutería Flores</span>
+                    <span class="letters-main">Bienvenido a Bisutería Flores</span>
                 </span>
             </h2>
             <p class="hero-subtitle">
                 <span class="letter-wrapper">
-                    <span class="letters-sub" data-translate="Joyas únicas hechas a mano para ti.">Joyas únicas hechas a mano para ti.</span>
+                    <span class="letters-sub">Joyas únicas hechas a mano para ti.</span>
                 </span>
             </p>
         </div>
@@ -98,16 +98,14 @@
         // Wait for speech synthesis to be ready
         setTimeout(() => {
             // Read initial welcome message
-            speak("Bienvenido a Bisutería Flores.");
-            
-            // Show accessibility modal after welcome message
+            speak("Bienvenido");
             setTimeout(() => {
                 const modal = document.getElementById('accessibilityModal');
                 modal.style.display = 'block';
                 speak("¿Tiene discapacidad visual? Presione la tecla espacio para activar las funciones de accesibilidad");
                 document.getElementById('btnYes').focus();
-            }, 3000); // Wait 2 seconds after welcome message
-        }, 1000); // Wait 1 second for synthesis to initialize
+            }, 5000); 
+        }, 1500); 
     });
 
     document.addEventListener('keydown', function(e) {
@@ -118,7 +116,8 @@
     });
 
     function handleYes() {
-        speak(`Bienvenido. Los comandos de accesibilidad son:
+        speak(`Bienvenido a Bisutería Flores
+Joyas únicas hechas a mano para ti. Los comandos de accesibilidad son:
                Use las flechas arriba y abajo para navegar por el menú.
                Use las flechas izquierda y derecha para navegar entre productos.
                La página leerá automáticamente el contenido de cada sección.
