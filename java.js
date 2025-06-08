@@ -31,6 +31,13 @@ window.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             indiceProductoActual = 0;
             leerProducto(indiceProductoActual);
+            // Añadir instrucción sobre tecla F después de leer el producto
+            setTimeout(() => {
+                const instruccion = new SpeechSynthesisUtterance('Presione la tecla F para agregar un producto');
+                instruccion.lang = 'es-ES';
+                instruccion.rate = 1;
+                window.speechSynthesis.speak(instruccion);
+            }, 2000); // Espera 2 segundos después de leer el producto
             document.querySelector('#productos').scrollIntoView({ behavior: 'smooth' });
         });
     }
