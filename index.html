@@ -20,20 +20,6 @@
             <button onclick="closeModal()">No</button>
         </div>
     </div>
-
-    <script>
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'es-ES';
-                utterance.rate = 0.04;
-                utterance.volume = 1;
-                window.speechSynthesis.cancel();
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-    </script>
-
         <nav class="navbar">
              <img src="/Resource/Logo/logo.png" alt="Logo de Bisutería Flores" class="logo">
          <ul class="nav-menu">
@@ -111,16 +97,19 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Read initial welcome message
-        speak("Bienvenido a Bisutería Flores.");
-        
-        // Show accessibility modal after welcome message
+        // Wait for speech synthesis to be ready
         setTimeout(() => {
-            const modal = document.getElementById('accessibilityModal');
-            modal.style.display = 'block';
-            speak("¿Tiene alguna discapacidad visual? Presione la tecla espacio para activar las funciones de accesibilidad");
-            document.getElementById('btnYes').focus();
-        }, 3000); // Increased delay to allow welcome message to finish
+            // Read initial welcome message
+            speak("Bienvenido a Bisutería Flores.");
+            
+            // Show accessibility modal after welcome message
+            setTimeout(() => {
+                const modal = document.getElementById('accessibilityModal');
+                modal.style.display = 'block';
+                speak("¿Tiene alguna discapacidad visual? Presione la tecla espacio para activar las funciones de accesibilidad");
+                document.getElementById('btnYes').focus();
+            }, 2000); // Wait 2 seconds after welcome message
+        }, 1000); // Wait 1 second for synthesis to initialize
     });
 
     document.addEventListener('keydown', function(e) {
