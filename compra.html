@@ -210,11 +210,15 @@ document.getElementById('realizarPedido').addEventListener('click', function() {
         <p>¡Gracias por tu compra!</p>
     `;
 
+    // Leer el resumen de la compra con voz
+    const mensaje = `Método de pago: ${metodoPago}. Total a pagar: ${total.toFixed(2)} soles. ¡Gracias por tu compra!`;
+    speak(mensaje);
+
     // Limpiar el carrito después de la compra
     localStorage.removeItem('cartItems');
     setTimeout(() => {
         window.location.href = 'index.html';
-    }, 3000);
+    }, 10000); // Cambiado a 10 segundos para dar más tiempo
 });
 
     </script>
