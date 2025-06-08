@@ -63,14 +63,6 @@ a:hover {
     text-decoration: underline;
 }
 
-body.modo-oscuro a {
-    color: white;
-}
-
-/* Iconos redes sociales */
-.bloque-redes i {
-    margin-right: 8px;
-}
 
 /* Línea separadora copyright */
 .texto-copyright {
