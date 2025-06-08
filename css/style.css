@@ -231,4 +231,52 @@ h1, h2, h3, p {
         border-bottom: 1px solid #eee;
         padding-bottom: 4px;
     }
-    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2em;
+        }
+        .hero-subtitle {
+            font-size: 1.2em;
+        }
+        #nosotros {
+            flex-direction: column;
+            padding: 2rem 1rem;
+        }
+        .product-grid {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            padding: 20px;
+        }
+        .nav-menu a {
+            font-size: 0.9em;
+            padding: 3px 8px;
+        }
+        .logo {
+            width: 90px;
+        }
+        .cart-content {
+            min-width: 280px;
+            margin: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-title {
+            font-size: 1.5em;
+        }
+        .hero-subtitle {
+            font-size: 1em;
+        }
+        .product-grid {
+            grid-template-columns: 1fr;
+            padding: 10px;
+        }
+        #nosotros p {
+            font-size: 1.2rem;
+        }
+        .product-title {
+            font-size: 1.2rem;
+        }
+        .product-description {
+            font-size: 0.9rem;
+        }
+    }
