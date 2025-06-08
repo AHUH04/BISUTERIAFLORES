@@ -12,6 +12,28 @@
     <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
+    <div id="accessibilityModal" class="modal">
+        <div class="modal-content">
+            <h2>Accesibilidad</h2>
+            <p>¿Tiene alguna discapacidad visual?</p>
+            <button onclick="handleYes()" id="btnYes">Sí</button>
+            <button onclick="closeModal()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                utterance.rate = 0.04;
+                utterance.volume = 1;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+    </script>
+
         <nav class="navbar">
              <img src="/Resource/Logo/logo.png" alt="Logo de Bisutería Flores" class="logo">
          <ul class="nav-menu">
@@ -41,26 +63,7 @@
             </p>
         </div>
     </section>
-    <div id="accessibilityModal" class="modal">
-        <div class="modal-content">
-            <h2>Accesibilidad</h2>
-            <p>¿Tiene alguna discapacidad visual?</p>
-            <button onclick="handleYes()" id="btnYes">Sí</button>
-            <button onclick="closeModal()">No</button>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    speak("¿Tiene alguna discapacidad visual? Presione la tecla espacio para activar las funciones de accesibilidad");
-                    document.addEventListener('keydown', function(e) {
-                        if (e.code === 'Space') {
-                            e.preventDefault();
-                            handleYes();
-                        }
-                    });
-                    document.getElementById('btnYes').focus();
-                });
-            </script>
-        </div>
-    </div>
+    
 
     <style>
     .modal {
@@ -94,9 +97,38 @@
     </style>
 
     <script>
-    window.onload = function() {
-        document.getElementById('accessibilityModal').style.display = 'block';
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.9;
+            utterance.volume = 1;
+            
+            window.speechSynthesis.speak(utterance);
+        }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Read initial welcome message
+        speak("Bienvenido a Bisutería Flores.");
+        
+        // Show accessibility modal after welcome message
+        setTimeout(() => {
+            const modal = document.getElementById('accessibilityModal');
+            modal.style.display = 'block';
+            speak("¿Tiene alguna discapacidad visual? Presione la tecla espacio para activar las funciones de accesibilidad");
+            document.getElementById('btnYes').focus();
+        }, 3000); // Increased delay to allow welcome message to finish
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            handleYes();
+        }
+    });
 
     function handleYes() {
         speak(`Bienvenido. Los comandos de accesibilidad son:
