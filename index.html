@@ -118,9 +118,9 @@
     function handleYes() {
         speak(`Bienvenido a Bisutería Flores
 Joyas únicas hechas a mano para ti. Los comandos de accesibilidad son:
-               
                Use las flechas arriba y abajo para navegar por el menú.
                Use las flechas izquierda y derecha para navegar entre productos.
+               Use la tecla Enter para seleccionar la sección.
                El menú de navegación incluye Inicio, Productos, Nosotros y Contacto.`);
         closeModal();
     } 
@@ -271,7 +271,7 @@ document.addEventListener('keydown', function(event) {
             currentIndex = (currentIndex + 1) % navLinks.length;
             navLinks[currentIndex].classList.add('nav-focused');
             navLinks[currentIndex].focus();
-            speak(navLinks[currentIndex].textContent);
+            speak(navLinks[currentIndex].textContent + '. Use la tecla enter para seleccionar.');
             break;
             
         case 'ArrowUp':
@@ -280,7 +280,7 @@ document.addEventListener('keydown', function(event) {
             currentIndex = (currentIndex - 1 + navLinks.length) % navLinks.length;
             navLinks[currentIndex].classList.add('nav-focused');
             navLinks[currentIndex].focus();
-            speak(navLinks[currentIndex].textContent);
+            speak(navLinks[currentIndex].textContent + '. Use la tecla enter para seleccionar.');
             break;
     }
 });
