@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bisutería Flores</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="css/compra.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+    <nav class="navbar">
+             <img src="/Resource/Logo/logo.png" alt="Logo de Bisutería Flores" class="logo">
+         <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html" class="active">Inicio</a></li>
+            <li class="nav-item"><a href="#productos" data-translate="Productos">Productos</a></li>
+            <li class="nav-item"><a href="#nosotros" data-translate="Nosotros">Nosotros</a></li>
+            <li class="nav-item"><a href="#contacto" data-translate="Contacto">Contacto</a></li>
+         </ul>
+            <div class="nav-cart">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-count">0</span>
+            </div>
+        </nav>
+    <div class="compra-container">
+        <div class="compra-title">Finalizar Compra</div>
+        <div id="productosSeleccionados"></div>
+        <div class="compra-metodo">
+            <label for="metodoPago">Método de pago:</label>
+            <select id="metodoPago">
+                <option value="transferencia">Transferencia Bancaria</option>
+            </select>
+        </div>
+        <!-- Formulario de transferencia bancaria con control por voz -->
+        <form id="formTransferencia" style="display: block; margin-top: 20px;">
+            <div>
+                <label for="nombreCompleto">Nombre completo:</label>
+                <input type="text" id="nombreCompleto" name="nombreCompleto" autocomplete="off">
+            </div>
+            <div>
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" name="dni" autocomplete="off">
+            </div>
+            <div>
+                <label for="banco">Banco:</label>
+                <input type="text" id="banco" name="banco" autocomplete="off">
+            </div>
+            <div>
+                <label for="cuenta">Número de cuenta:</label>
+                <input type="text" id="cuenta" name="cuenta" autocomplete="off">
+            </div>
+        </form>
+        <button class="compra-btn" id="realizarPedido">Realizar pedido</button>
+        <div class="compra-resumen" id="compraResumen"></div>
+    </div>
+    <style>
+        .producto-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .producto-imagen {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .producto-info {
+            flex: 1;
+        }
+
+        .producto-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .producto-info p {
+            margin: 0;
+            color: #666;
+        }
+    </style>
+<section id="contacto">
+     <footer class="seccion-footer">
+            <div class="contenedor-footer">
+                <div class="bloque-logo">
+                    <img src="/Resource/Logo/logo.png" alt="Polyline">
+                    <div class="texto-copyright" style="color: black;">
+                        <p>&copy; 2025 Bisuteria Flores. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+                <div class="bloque-contacto" style="color: black;" id="contact-info">
+                    <h3>CONTACTOS:</h3>
+                    <p>WhatsApp: <a href="https://wa.link/79t5bz">+51 929 162 402</a></p>
+                    <p>Email: <a href="mailto:contacto@bisuteriaflores.pe">contacto@bisuteriaflores.com</a></p>
+                    <p>Dirección: Jr. Huallaga Nº 653 - TDA. 109</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item a'));
+    let navIndex = navLinks.findIndex(link => link.classList.contains('active'));
+    if (navIndex === -1) navIndex = 0;
+    navLinks[navIndex].focus();
+    navLinks[navIndex].classList.add('nav-focused');
+
+    // Función para leer el texto del enlace con voz
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); // Detener cualquier lectura anterior
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'es-ES';
+            window.speechSynthesis.speak(utter);
+        }
+    }
+});
+// Función para leer el texto del enlace con voz
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Detener cualquier lectura anterior
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'es-ES';
+        window.speechSynthesis.speak(utter);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item a'));
+    let navIndex = navLinks.findIndex(link => link.classList.contains('active'));
+    if (navIndex === -1) navIndex = 0;
+    navLinks[navIndex].focus();
+    navLinks[navIndex].classList.add('nav-focused');
+});
+        document.addEventListener('keydown', function(event) {
+    const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item a'));
+    let currentIndex = navLinks.findIndex(link => link.classList.contains('nav-focused'));
+
+    switch(event.key) {
+        case 'ArrowDown':
+            event.preventDefault();
+            navLinks[currentIndex]?.classList.remove('nav-focused');
+            currentIndex = (currentIndex + 1) % navLinks.length;
+            navLinks[currentIndex].classList.add('nav-focused');
+            navLinks[currentIndex].focus();
+            speak(navLinks[currentIndex].textContent);
+            break;
+            
+        case 'ArrowUp':
+            event.preventDefault();
+            navLinks[currentIndex]?.classList.remove('nav-focused');
+            currentIndex = (currentIndex - 1 + navLinks.length) % navLinks.length;
+            navLinks[currentIndex].classList.add('nav-focused');
+            navLinks[currentIndex].focus();
+            speak(navLinks[currentIndex].textContent);
+            break;
+    }
+});
+        // Limpiar el carrito al regresar a la página anterior
+        window.onbeforeunload = function() {
+            localStorage.removeItem('cartItems');
+        };
+        
+        // Función para mostrar los productos seleccionados
+        function mostrarProductos() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const productosDiv = document.getElementById('productosSeleccionados');
+            
+            productosDiv.innerHTML = '';
+            
+            cartItems.forEach(product => {
+                const productoHTML = `
+                    <div class="producto-item">
+                        <img src="${product.image}" alt="${product.name}" class="producto-imagen">
+                        <div class="producto-info">
+                            <h3>${product.name}</h3>
+                            <p>${product.description}</p>
+                            <p class="precio">${product.price}</p>
+                        </div>
+                    </div>
+                `;
+                productosDiv.innerHTML += productoHTML;
+            });
+        }
+
+        // Llamar a la función cuando se carga la página
+        document.addEventListener('DOMContentLoaded', mostrarProductos);
+
+    
+// Manejar el evento click del botón "Realizar pedido"
+document.getElementById('realizarPedido').addEventListener('click', function() {
+    const metodoPago = document.getElementById('metodoPago').value;
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const resumenDiv = document.getElementById('compraResumen');
+    let total = 0;
+
+    cartItems.forEach(product => {
+        const precioStr = product.price.replace('S/', '').trim();
+        const precio = parseFloat(precioStr) || 0;
+        total += precio;
+    });
+
+    resumenDiv.innerHTML = `
+        <p>Método de pago: ${metodoPago}</p>
+        <p>Total a pagar: S/ ${total.toFixed(2)}</p>
+        <p>¡Gracias por tu compra!</p>
+    `;
+
+    // Leer el resumen de la compra con voz y esperar a que termine antes de redirigir
+    const mensaje = `Método de pago: ${metodoPago}. Total a pagar: ${total.toFixed(2)} soles. ¡Gracias por tu compra!`;
+    const utter = new SpeechSynthesisUtterance(mensaje);
+    utter.lang = 'es-ES';
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utter);
+    utter.onend = function() {
+        // Limpiar el carrito después de la compra y redirigir
+        localStorage.removeItem('cartItems');
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000); // 1 segundo después de la voz
+    };
+});
+        document.addEventListener('DOMContentLoaded', function() {
+    // Dar focus al primer campo del formulario al cargar
+    const primerCampo = document.getElementById('nombreCompleto');
+    if (primerCampo) {
+        primerCampo.focus();
+    }
+});
+
+// --- INICIO: Reconocimiento de voz y lectura de campos del formulario ---
+const camposForm = [
+    { id: 'nombreCompleto', label: 'Nombre completo' },
+    { id: 'dni', label: 'DNI' },
+    { id: 'banco', label: 'Banco' },
+    { id: 'cuenta', label: 'Número de cuenta' },
+];
+
+function leerYDictarCampoSecuencial(index = 0) {
+    if (index >= camposForm.length) {
+        // Todos los campos completados, quitar el focus de cualquier campo activo
+        if (document.activeElement && document.activeElement.blur) {
+            document.activeElement.blur();
+        }
+        // Leer el resumen de la compra automáticamente
+        const btn = document.getElementById('realizarPedido');
+        if (btn) {
+            setTimeout(() => {
+                btn.click();
+            }, 800); // Pequeño delay antes de hacer click automáticamente
+        }
+        return;
+    }
+    const campo = camposForm[index];
+    const input = document.getElementById(campo.id);
+    if (!input) return;
+    input.focus();
+    // Leer el campo y solo después activar el micrófono
+    const texto = 'Por favor, diga su ' + campo.label;
+    const utter = new SpeechSynthesisUtterance(texto);
+    utter.lang = 'es-ES';
+    utter.onend = function() {
+        setTimeout(() => {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'es-PE';
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+                recognition.start();
+                recognition.onresult = function(event) {
+                    const resultado = event.results[0][0].transcript;
+                    input.value = resultado;
+                    speak('Campo ' + campo.label + ' completado.');
+                    setTimeout(() => leerYDictarCampoSecuencial(index + 1), 2500); // Más delay tras tu respuesta
+                };
+                recognition.onerror = function() {
+                    speak('No se pudo reconocer el audio. Intente de nuevo.');
+                    setTimeout(() => leerYDictarCampoSecuencial(index), 3000);
+                };
+            } else {
+                speak('El reconocimiento de voz no está soportado en este navegador.');
+            }
+        }, 300); // Delay tras terminar de leer antes de activar el micro
+    };
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utter);
+}
+
+// Iniciar llenado secuencial al cargar la página
+window.addEventListener('DOMContentLoaded', function() {
+    leerYDictarCampoSecuencial(0);
+});
+        </script>
+</body>
+</html>

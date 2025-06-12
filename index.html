@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Bisutería Flores</title>
+    <link rel="icon" href="/Resource/Logo/logo-bisuteria.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+    <div id="accessibilityModal" class="modal">
+        <div class="modal-content">
+            <h2>Accesibilidad</h2>
+            <p>¿Tiene discapacidad visual?</p>
+            <button onclick="handleYes()" id="btnYes">Sí</button>
+            <button onclick="closeModal()">No</button>
+        </div>
+    </div>
+        <nav class="navbar">
+             <img src="/Resource/Logo/logo.png" alt="Logo de Bisutería Flores" class="logo">
+         <ul class="nav-menu">
+            <li class="nav-item"><a href="#inicio" class="active">Inicio</a></li>
+            <li class="nav-item"><a href="#productos" data-translate="Productos">Productos</a></li>
+            <li class="nav-item"><a href="#nosotros" data-translate="Nosotros">Nosotros</a></li>
+            <li class="nav-item"><a href="#contacto" data-translate="Contacto">Contacto</a></li>
+         </ul>
+            <div class="nav-cart">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-count">0</span>
+            </div>
+        </nav>
+    
+    <section id="inicio" style="position: relative; height: 80vh; overflow: hidden;">
+        <div style="background-image: url('/Resource/collar.jpg'); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; filter: brightness(50%);"></div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.3); z-index: 0;"></div> 
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%; color: #fff; z-index: 1;">
+            <h2 class="hero-title">
+                <span class="letter-wrapper">
+                    <span class="letters-main">Bienvenido a Bisutería Flores</span>
+                </span>
+            </h2>
+            <p class="hero-subtitle">
+                <span class="letter-wrapper">
+                    <span class="letters-sub">Joyas únicas hechas a mano para ti.</span>
+                </span>
+            </p>
+        </div>
+    </section>
+    <style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .modal button {
+        margin: 10px;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    </style>
+      <script>
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            utterance.rate = 0.9;
+            utterance.volume = 1;
+            
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait for speech synthesis to be ready
+        setTimeout(() => {
+            // Read initial welcome message
+            speak("Bienvenido");
+            setTimeout(() => {
+                const modal = document.getElementById('accessibilityModal');
+                modal.style.display = 'block';
+                speak("¿Tiene discapacidad visual? Presione la tecla espacio para activar las funciones de accesibilidad");
+                document.getElementById('btnYes').focus();
+            }, 2500); 
+        }, 1500); 
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            handleYes();
+        }
+    });
+
+    function handleYes() {
+        speak(`Bienvenido a Bisutería Flores
+Joyas únicas hechas a mano para ti. Los comandos de accesibilidad son:
+               Use las flechas arriba y abajo para navegar por el menú.
+               Use las flechas izquierda y derecha para navegar entre productos.
+               El menú de navegación incluye Inicio, Productos, Nosotros y Contacto.`);
+        closeModal();
+    } 
+
+    function closeModal() {
+        document.getElementById('accessibilityModal').style.display = 'none';
+    }
+    </script>
+    <section id="productos" style="padding: 50px; text-align: center;">
+        <h2 data-translate="Nuestros Productos">Nuestros Productos</h2>
+        <p data-translate="Descubre nuestra colección de joyas únicas.">Descubre nuestra colección de joyas únicas.</p>
+       
+    <div class="product-grid">
+        <!-- Producto 1 -->
+        <div class="product-card">
+            <img src="https://i.etsystatic.com/38005514/r/il/be6f86/6689415226/il_794xN.6689415226_19qs.jpg" alt="Collar de conchas" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Collar de conchas</div>
+                <div class="product-description">Collar de cuentas gruesas con chips de concha de colores.</div>
+                <div class="product-price">S/210</div>
+                <button class="add-to-cart">Añadir al carrito</button>
+            </div>
+        </div>
+        
+        <!-- Producto 2 -->
+        <div class="product-card">
+            <img src="https://marcarlero.com/modules/ps_banner/img/eb869c64d5dbd136676fcf4bfc2cc611.jpg" alt="Collar Artesanal" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Collar Artesanal</div>
+                <div class="product-description">Hecho a mano con materiales de alta calidad y diseño único.</div>
+                <div class="product-price">S/150</div>
+                <button class="add-to-cart">Añadir al carrito</button>
+            </div>
+        </div>
+        
+        <!-- Producto 3 -->
+        <div class="product-card">
+            <img src="https://baliq.com/wp-content/uploads/2023/02/pulseras-corregido.jpg" alt="Pulsera de perlas" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Pulsera de Perlas</div>
+                <div class="product-description">Elegancia para cualquier ocasión con perlas naturales.</div>
+                <div class="product-price">S/380</div>
+                <button class="add-to-cart">Añadir al carrito</button>
+            </div>
+        </div>
+        
+        <!-- Producto 4 -->
+        <div class="product-card">
+            <img src="https://bisuteriaflores.pe/wp-content/uploads/2024/07/328-600x684.jpg" alt="Pulsera de piedras" class="product-image">
+            <div class="product-info">
+                <div class="product-title">Pulsera de piedras naturales</div>
+                <div class="product-description">Diseño exclusivo de una piedra natural cascajo agata amarillo miel.</div>
+                <div class="product-price">S/130</div>
+                <button class="add-to-cart">Añadir al carrito</button>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="nosotros">
+        <div class="content">
+            <h2 data-translate="Sobre nosotros">Sobre nosotros</h2>
+            <p data-translate="descripcion-empresa">
+                Bisutería Flores es una marca dedicada a crear joyas únicas y personalizadas.</p>
+            </p>
+        </div>
+        <div class="model-container">
+            <img src="/Resource/bis.jpg" alt="Sobre Nosotros" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+        </div>
+    </section>
+    <section id="contacto">
+        <div class="content">
+     <footer class="seccion-footer">
+            <div class="contenedor-footer">
+                <div class="bloque-logo">
+                    <img src="/Resource/Logo/logo.png" alt="Polyline">
+                    <div class="texto-copyright" style="color: black;">
+                        <p>&copy; 2025 Bisuteria Flores. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+                <div class="bloque-contacto" style="color: black;" id="contact-info">
+                    <h3>CONTACTOS:</h3>
+                    <p>WhatsApp: <a href="https://wa.link/79t5bz">+51 929 162 402</a></p>
+                    <p>Email: <a href="mailto:contacto@bisuteriaflores.pe">contacto@bisuteriaflores.com</a></p>
+                    <p>Dirección: Jirón Huallaga Nº 653 - Tienda 109</p>
+                </div>
+            </div>
+        </footer>
+         </div>
+    </section>
+
+<!-- Overlay del carrito -->
+    <div id="cartOverlay" class="cart-overlay">
+        <div class="cart-content">
+            <button id="closeCart" class="close-cart">✖</button>
+            <h2>Carrito de compras</h2>
+            <div class="cart-items">
+                <p>Tu carrito está vacío.</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/java.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item a'));
+    let navIndex = navLinks.findIndex(link => link.classList.contains('active'));
+    if (navIndex === -1) navIndex = 0;
+    navLinks[navIndex].focus();
+    navLinks[navIndex].classList.add('nav-focused');
+
+    // Función para leer el texto del enlace con voz
+    function speak(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); // Detener cualquier lectura anterior
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'es-ES';
+            window.speechSynthesis.speak(utter);
+        }
+    }
+});
+// Función para leer el texto del enlace con voz
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Detener cualquier lectura anterior
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'es-ES';
+        window.speechSynthesis.speak(utter);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item a'));
+    let navIndex = navLinks.findIndex(link => link.classList.contains('active'));
+    if (navIndex === -1) navIndex = 0;
+    navLinks[navIndex].focus();
+    navLinks[navIndex].classList.add('nav-focused');
+});
+
+document.addEventListener('keydown', function(event) {
+    const navLinks = Array.from(document.querySelectorAll('.nav-menu .nav-item a'));
+    let currentIndex = navLinks.findIndex(link => link.classList.contains('nav-focused'));
+
+    switch(event.key) {
+        case 'ArrowDown':
+            event.preventDefault();
+            navLinks[currentIndex]?.classList.remove('nav-focused');
+            currentIndex = (currentIndex + 1) % navLinks.length;
+            navLinks[currentIndex].classList.add('nav-focused');
+            navLinks[currentIndex].focus();
+            speak(navLinks[currentIndex].textContent + '. Use la tecla enter para seleccionar.');
+            break;
+            
+        case 'ArrowUp':
+            event.preventDefault();
+            navLinks[currentIndex]?.classList.remove('nav-focused');
+            currentIndex = (currentIndex - 1 + navLinks.length) % navLinks.length;
+            navLinks[currentIndex].classList.add('nav-focused');
+            navLinks[currentIndex].focus();
+            speak(navLinks[currentIndex].textContent + '. Use la tecla enter para seleccionar.');
+            break;
+    }
+});
+// Carrito de compras
+let cartItems = [];
+let cartCount = document.querySelector('.cart-count');
+let cartOverlay = document.getElementById('cartOverlay');
+let cartItemsContainer = document.querySelector('.cart-items');
+
+// Initialize with empty cart
+cartCount.textContent = 0;
+updateCart();
+
+// Agregar evento a los botones "Añadir al carrito"
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function() {
+        const card = this.closest('.product-card');
+        const product = {
+            name: card.querySelector('.product-title').textContent,
+            price: card.querySelector('.product-price').textContent,
+            image: card.querySelector('.product-image').src,
+            description: card.querySelector('.product-description').textContent
+        };
+        
+        cartItems.push(product);
+        updateCart();
+        cartCount.textContent = cartItems.length;
+    });
+});
+
+// Mostrar/ocultar carrito
+document.querySelector('.nav-cart').addEventListener('click', () => {
+    cartOverlay.style.display = 'flex';
+});
+
+document.getElementById('closeCart').addEventListener('click', () => {
+    cartOverlay.style.display = 'none';
+});
+
+// Cargar carrito desde localStorage al inicio
+cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+cartCount.textContent = cartItems.length;
+
+// Actualizar contenido del carrito
+function updateCart() {
+    if (cartItems.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Tu carrito está vacío.</p>';
+    } else {
+        cartItemsContainer.innerHTML = cartItems.map(item => `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover;">
+                <span>${item.name}</span>
+                <span>${item.price}</span>
+            </div>
+        `).join('');
+    }
+
+    // Guardar en localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}
+
+ // Función para leer el texto automáticamente
+                    function readContactInfo() {
+                        if ('speechSynthesis' in window) {
+                            const contactDiv = document.getElementById('contact-info');
+                            const textToRead = Array.from(contactDiv.querySelectorAll('h3, p'))
+                                .map(element => element.textContent)
+                                .join('. ');
+                            
+                            const utterance = new SpeechSynthesisUtterance(textToRead);
+                            utterance.lang = 'es-ES';
+                            window.speechSynthesis.cancel();
+                            window.speechSynthesis.speak(utterance);
+                        }
+                    }
+
+                    // Agregar event listeners para los links del nav
+                    document.querySelectorAll('.nav-menu a').forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const sectionId = this.getAttribute('href').substring(1);
+                            const section = document.getElementById(sectionId);
+                            
+                            if (section) {
+                                section.scrollIntoView();
+                                const textToRead = section.textContent;
+                                const utterance = new SpeechSynthesisUtterance(textToRead);
+                                utterance.lang = 'es-ES';
+                                window.speechSynthesis.cancel();
+                                window.speechSynthesis.speak(utterance);
+                            }
+                        });
+                    });
+ function readAboutUs() {
+                    if ('speechSynthesis' in window) {
+                        const aboutUsText = document.querySelector('[data-translate="Sobre nosotros"]').textContent + '. ' + 
+                                          document.querySelector('[data-translate="descripcion-empresa"]').textContent;
+                        const utterance = new SpeechSynthesisUtterance(aboutUsText);
+                        utterance.lang = 'es-ES';
+                        window.speechSynthesis.cancel();
+                        window.speechSynthesis.speak(utterance);
+                    }
+                }
+
+                // Add event listener to the "Nosotros" nav link
+                document.querySelector('a[href="#nosotros"]').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('nosotros').scrollIntoView();
+                    readAboutUs();
+                });
+</script>
+</html>
