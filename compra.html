@@ -281,7 +281,7 @@ function leerYDictarCampoSecuencial(index = 0) {
                     const resultado = event.results[0][0].transcript;
                     input.value = resultado;
                     speak('Campo ' + campo.label + ' completado.');
-                    setTimeout(() => leerYDictarCampoSecuencial(index + 1), 2500); // Más delay tras tu respuesta
+                    setTimeout(() => leerYDictarCampoSecuencial(index + 1), 3000); // Más delay tras tu respuesta
                 };
                 recognition.onerror = function() {
                     speak('No se pudo reconocer el audio. Intente de nuevo.');
@@ -290,7 +290,7 @@ function leerYDictarCampoSecuencial(index = 0) {
             } else {
                 speak('El reconocimiento de voz no está soportado en este navegador.');
             }
-        }, 300); // Delay tras terminar de leer antes de activar el micro
+        }, 400); // Delay tras terminar de leer antes de activar el micro
     };
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utter);
