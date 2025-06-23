@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bisutería Flores</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="css/compra.css">
@@ -11,49 +13,49 @@
 </head>
 <body>
 
-    <nav class="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
              <img src="/Resource/Logo/logo.png" alt="Logo de Bisutería Flores" class="logo">
-         <ul class="nav-menu">
-            <li class="nav-item"><a href="index.html" class="active">Inicio</a></li>
-            <li class="nav-item"><a href="#productos" data-translate="Productos">Productos</a></li>
-            <li class="nav-item"><a href="#nosotros" data-translate="Nosotros">Nosotros</a></li>
-            <li class="nav-item"><a href="#contacto" data-translate="Contacto">Contacto</a></li>
+         <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a href="index.html" class="active nav-link">Inicio</a></li>
+            <li class="nav-item"><a href="index.html" data-translate="Productos" class="nav-link">Productos</a></li>
+            <li class="nav-item"><a href="index.html" data-translate="Nosotros" class="nav-link">Nosotros</a></li>
+            <li class="nav-item"><a href="index.html" data-translate="Contacto" class="nav-link">Contacto</a></li>
          </ul>
             <div class="nav-cart">
-                <span class="cart-icon">🛒</span>
-                <span class="cart-count">0</span>
+            <span class="cart-icon">🛒</span>
+            <span class="cart-count">0</span>
             </div>
         </nav>
-    <div class="compra-container">
-        <div class="compra-title">Finalizar Compra</div>
+    <div class="compra-container container my-5 p-4 bg-white rounded shadow">
+        <h2 class="compra-title mb-4">Finalizar Compra</h2>
         <div id="productosSeleccionados"></div>
-        <div class="compra-metodo">
-            <label for="metodoPago">Método de pago:</label>
-            <select id="metodoPago">
+        <div class="compra-metodo mb-3">
+            <label for="metodoPago" class="form-label">Método de pago:</label>
+            <select id="metodoPago" class="form-select w-auto d-inline-block">
                 <option value="transferencia">Transferencia Bancaria</option>
             </select>
         </div>
         <!-- Formulario de transferencia bancaria con control por voz -->
-        <form id="formTransferencia" style="display: block; margin-top: 20px;">
-            <div>
-                <label for="nombreCompleto">Nombre completo:</label>
-                <input type="text" id="nombreCompleto" name="nombreCompleto" autocomplete="off">
+        <form id="formTransferencia" class="row g-3" style="display: block; margin-top: 20px;">
+            <div class="col-md-6">
+                <label for="nombreCompleto" class="form-label">Nombre completo:</label>
+                <input type="text" id="nombreCompleto" name="nombreCompleto" autocomplete="off" class="form-control">
             </div>
-            <div>
-                <label for="dni">DNI:</label>
-                <input type="text" id="dni" name="dni" autocomplete="off">
+            <div class="col-md-6">
+                <label for="dni" class="form-label">DNI:</label>
+                <input type="text" id="dni" name="dni" autocomplete="off" class="form-control">
             </div>
-            <div>
-                <label for="banco">Banco:</label>
-                <input type="text" id="banco" name="banco" autocomplete="off">
+            <div class="col-md-6">
+                <label for="banco" class="form-label">Banco:</label>
+                <input type="text" id="banco" name="banco" autocomplete="off" class="form-control">
             </div>
-            <div>
-                <label for="cuenta">Número de cuenta:</label>
-                <input type="text" id="cuenta" name="cuenta" autocomplete="off">
+            <div class="col-md-6">
+                <label for="cuenta" class="form-label">Número de cuenta:</label>
+                <input type="text" id="cuenta" name="cuenta" autocomplete="off" class="form-control">
             </div>
         </form>
-        <button class="compra-btn" id="realizarPedido">Realizar pedido</button>
-        <div class="compra-resumen" id="compraResumen"></div>
+        <button class="compra-btn btn btn-success mt-3" id="realizarPedido">Realizar pedido</button>
+        <div class="compra-resumen mt-4" id="compraResumen"></div>
     </div>
     <style>
         .producto-item {
@@ -88,22 +90,35 @@
         }
     </style>
 <section id="contacto">
-     <footer class="seccion-footer">
-            <div class="contenedor-footer">
-                <div class="bloque-logo">
-                    <img src="/Resource/Logo/logo.png" alt="Polyline">
-                    <div class="texto-copyright" style="color: black;">
-                        <p>&copy; 2025 Bisuteria Flores. Todos los derechos reservados.</p>
-                    </div>
-                </div>
-                <div class="bloque-contacto" style="color: black;" id="contact-info">
-                    <h3>CONTACTOS:</h3>
-                    <p>WhatsApp: <a href="https://wa.link/79t5bz">+51 929 162 402</a></p>
-                    <p>Email: <a href="mailto:contacto@bisuteriaflores.pe">contacto@bisuteriaflores.com</a></p>
-                    <p>Dirección: Jr. Huallaga Nº 653 - TDA. 109</p>
+    <footer class="seccion-footer bg-light border-top py-4 mt-5">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="d-flex align-items-center mb-3 mb-md-0">
+                <img src="/Resource/Logo/logo.png" alt="Bisutería Flores" class="me-3" style="height: 78px;">
+                <div class="texto-copyright text-muted">
+                    <p class="mb-0">&copy; 2025 Bisutería Flores.</p>
                 </div>
             </div>
-        </footer>
+            <div class="bloque-contacto" id="contact-info">
+                <h5 class="fw-bold mb-2 text-dark">CONTACTOS:</h5>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-1">
+                        <i class="bi bi-whatsapp text-success me-1"></i>
+                        WhatsApp: <a href="https://wa.link/79t5bz" class="link-primary text-decoration-none">+51 929 162 402</a>
+                    </li>
+                    <li class="mb-1">
+                        <i class="bi bi-envelope-fill text-primary me-1"></i>
+                        Email: <a href="mailto:contacto@bisuteriaflores.pe" class="link-primary text-decoration-none">contacto@bisuteriaflores.com</a>
+                    </li>
+                    <li>
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                        Dirección: Jr. Huallaga Nº 653 - TDA. 109
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     </section>
     <script>
 
@@ -281,7 +296,7 @@ function leerYDictarCampoSecuencial(index = 0) {
                     const resultado = event.results[0][0].transcript;
                     input.value = resultado;
                     speak('Campo ' + campo.label + ' completado.');
-                    setTimeout(() => leerYDictarCampoSecuencial(index + 1), 3000); // Más delay tras tu respuesta
+                    setTimeout(() => leerYDictarCampoSecuencial(index + 1), 3500); // Más delay tras tu respuesta
                 };
                 recognition.onerror = function() {
                     speak('No se pudo reconocer el audio. Intente de nuevo.');
@@ -301,5 +316,7 @@ window.addEventListener('DOMContentLoaded', function() {
     leerYDictarCampoSecuencial(0);
 });
         </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
