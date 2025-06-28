@@ -244,77 +244,86 @@ document.getElementById('realizarPedido').addEventListener('click', function() {
         }, 1000); // 1 segundo después de la voz
     };
 });
-        document.addEventListener('DOMContentLoaded', function() {
-    // Dar focus al primer campo del formulario al cargar
-    const primerCampo = document.getElementById('nombreCompleto');
-    if (primerCampo) {
-        primerCampo.focus();
-    }
-});
-
-// --- INICIO: Reconocimiento de voz y lectura de campos del formulario ---
+        // --- INICIO: Navegación manual por campos del formulario con barra espaciadora ---
 const camposForm = [
-    { id: 'nombreCompleto', label: 'Nombre completo' },
+    { id: 'nombreCompleto', label: 'Nombre ' },
     { id: 'dni', label: 'DNI' },
     { id: 'banco', label: 'Banco' },
     { id: 'cuenta', label: 'Número de cuenta' },
 ];
 
-function leerYDictarCampoSecuencial(index = 0) {
-    if (index >= camposForm.length) {
-        // Todos los campos completados, quitar el focus de cualquier campo activo
-        if (document.activeElement && document.activeElement.blur) {
-            document.activeElement.blur();
+function focusSiguienteCampo(actualId) {
+    const idx = camposForm.findIndex(c => c.id === actualId);
+    if (idx !== -1 && idx < camposForm.length - 1) {
+        const siguiente = document.getElementById(camposForm[idx + 1].id);
+        if (siguiente) {
+            siguiente.focus();
+            // Al enfocar, leer "Complete el campo ..."
+            speak('Complete el campo ' + camposForm[idx + 1].label + '.');
         }
-        // Leer el resumen de la compra automáticamente
-        const btn = document.getElementById('realizarPedido');
-        if (btn) {
-            setTimeout(() => {
-                btn.click();
-            }, 800); // Pequeño delay antes de hacer click automáticamente
-        }
-        return;
+    } else if (idx === camposForm.length - 1) {
+        speak('Todos los campos completados. Presione el botón Realizar pedido para finalizar la compra.');
     }
-    const campo = camposForm[index];
-    const input = document.getElementById(campo.id);
-    if (!input) return;
-    input.focus();
-    // Leer el campo y solo después activar el micrófono
-    const texto = 'Por favor, diga su ' + campo.label;
-    const utter = new SpeechSynthesisUtterance(texto);
-    utter.lang = 'es-ES';
-    utter.onend = function() {
-        setTimeout(() => {
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                const recognition = new SpeechRecognition();
-                recognition.lang = 'es-PE';
-                recognition.interimResults = false;
-                recognition.maxAlternatives = 1;
-                recognition.start();
-                recognition.onresult = function(event) {
-                    const resultado = event.results[0][0].transcript;
-                    input.value = resultado;
-                    speak('Campo ' + campo.label + ' completado.');
-                    setTimeout(() => leerYDictarCampoSecuencial(index + 1), 3500); // Más delay tras tu respuesta
-                };
-                recognition.onerror = function() {
-                    speak('No se pudo reconocer el audio. Intente de nuevo.');
-                    setTimeout(() => leerYDictarCampoSecuencial(index), 3000);
-                };
-            } else {
-                speak('El reconocimiento de voz no está soportado en este navegador.');
-            }
-        }, 400); // Delay tras terminar de leer antes de activar el micro
-    };
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utter);
 }
 
-// Iniciar llenado secuencial al cargar la página
 window.addEventListener('DOMContentLoaded', function() {
-    leerYDictarCampoSecuencial(0);
+    camposForm.forEach(campo => {
+        const input = document.getElementById(campo.id);
+        if (input) {
+            input.addEventListener('focus', function() {
+                speak('Complete el campo ' + campo.label + '.');
+            });
+            // Doble espacio para avanzar
+            let lastSpaceTime = 0;
+            input.addEventListener('input', function() {
+                if (input.value.trim() !== '') {
+                    speak('Pulse la tecla espacio dos veces para ir al siguiente campo.');
+                }
+            });
+            input.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' || e.key === ' ') {
+                    const now = Date.now();
+                    if (now - lastSpaceTime < 400) { // 400ms para doble espacio
+                        e.preventDefault();
+                        if (input.value.trim() !== '') {
+                            const idx = camposForm.findIndex(c => c.id === campo.id);
+                            if (idx !== -1 && idx < camposForm.length - 1) {
+                                const utter = new SpeechSynthesisUtterance('Avanzando al siguiente campo.');
+                                utter.lang = 'es-ES';
+                                utter.onend = function() {
+                                    focusSiguienteCampo(campo.id);
+                                };
+                                window.speechSynthesis.cancel();
+                                window.speechSynthesis.speak(utter);
+                            } else if (idx === camposForm.length - 1) {
+                                // Al completar el último campo, realizar pedido automáticamente
+                                const utter = new SpeechSynthesisUtterance('Todos los campos completados. Procesando su pedido.');
+                                utter.lang = 'es-ES';
+                                utter.onend = function() {
+                                    document.getElementById('realizarPedido').click();
+                                };
+                                window.speechSynthesis.cancel();
+                                window.speechSynthesis.speak(utter);
+                            }
+                        } else {
+                            focusSiguienteCampo(campo.id);
+                        }
+                        lastSpaceTime = 0; // reset
+                    } else {
+                        lastSpaceTime = now;
+                    }
+                }
+            });
+        }
+    });
+    // Dar focus al primer campo al cargar
+    const primerCampo = document.getElementById('nombreCompleto');
+    if (primerCampo) {
+        primerCampo.focus();
+    }
+    // Eliminar el focus automático al primer campo
 });
+        // --- FIN: Navegación manual por campos del formulario ---
         </script>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
